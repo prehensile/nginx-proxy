@@ -35,6 +35,9 @@ server {
 	listen 80 default_server;
 	server_name _; # This is just an invalid value which will never trigger on a real hostname.
 	return 503;
+	
+	# fix docker push uploads
+	chunked_transfer_encoding on;
 }
 
 {{ range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" "," }}
